@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+
+const TextApp = () => {
+  const [text, setText] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log('Text submitted:', text);
+    // Close the modal after submission
+    setShowModal(false);
+  };
+
+  return (
+    <div>
+      <button onClick={() => setShowModal(true)}>Open Modal</button>
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Submit Text</h2>
+            <textarea rows="4" cols="50" value={text} onChange={handleTextChange} />
+            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={() => setShowModal(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {text && (
+        <div className="card">
+          <h3>Text Content</h3>
+          <p>{text}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TextApp;
